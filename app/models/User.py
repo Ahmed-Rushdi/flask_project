@@ -8,7 +8,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(60), unique=False, nullable=False)
     role = db.Column(db.String(30), unique=False, nullable=False, default="user")
     avatar = db.Column(db.BLOB, nullable=True)
-    library_books = db.relationship("Book", secondary="user_books", backref="user")
+    books = db.relationship("Book", secondary="user_books", back_populates="users")
 
     def __init__(self, username: str, password: str, role: str = "user") -> None:
         self.username = username

@@ -4,6 +4,7 @@ from flask_jwt_extended import JWTManager
 from app.utils import bytes_to_base64
 from datetime import timedelta
 
+
 db = SQLAlchemy()
 jwt_manager = JWTManager()
 
@@ -26,6 +27,10 @@ def create_app(**kwargs):
 
     jwt_manager.init_app(app)
 
+    from app.models.User import User
+    from app.models.Book import Book
+    from app.models.UserBooks import user_books
+
     db.init_app(app)
     with app.app_context():
         db.create_all()
@@ -34,9 +39,12 @@ def create_app(**kwargs):
     def home():
         return render_template("layout.html")
 
-    from app.views import auth
+    from app.views import auth, users, admin, books
 
     app.register_blueprint(auth.bp)
+    app.register_blueprint(users.bp)
+    app.register_blueprint(admin.bp)
+    app.register_blueprint(books.bp)
 
     # app.register_blueprint(views)
 

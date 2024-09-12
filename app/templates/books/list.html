@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1 class="text-center text-3xl my-4 tracking-wide">BOOKS</h1>
+    <ul>
+        {% for book in books %}
+            <li class="my-4">
+                <a href="{{ url_for('books.show', book_id=book.id) }}">{{ book.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

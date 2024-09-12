@@ -7,9 +7,7 @@ class Book(db.Model):
     cover = db.Column(db.BLOB, nullable=True)
 
     # IK "libraried" is not a real word but it does the job lol.
-    libraried_by = db.relationship(
-        "User", secondary="user_books", backref="library_books"
-    )
+    users = db.relationship("User", secondary="user_books", back_populates="books")
 
     def __init__(self, title: str, cover: bytes) -> None:
         self.title = title

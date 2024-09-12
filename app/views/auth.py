@@ -20,7 +20,7 @@ jwt_manager.user_identity_loader
 @bp.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
-        return render_template("login.html")
+        return render_template("auth/login.html")
 
     username = request.form.get("username")
     password = request.form.get("password")
@@ -50,7 +50,9 @@ def register():
     username = request.form.get("username")
     password = request.form.get("password")
     confirm = request.form.get("confirm")
-
+    if not username or not password or not confirm:
+        flash("All fields are required")
+        return render_template("auth/register.html")
     if password != confirm:
         flash("Passwords do not match")
         return render_template("auth/register.html")
