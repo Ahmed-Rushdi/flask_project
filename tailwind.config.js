@@ -4,7 +4,14 @@ module.exports = {
     "./app/templates/**/*.{html,js}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'darkest': '#45474B',
+        'light': '#F5F7F8',
+        'secondary': '#F4CE14',
+        'dark': '#495E57',
+      }
+    },
   },
   plugins: [],
 }
